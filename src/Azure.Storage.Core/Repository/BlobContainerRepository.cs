@@ -13,16 +13,22 @@ namespace Azure.BlobAccess.Core.Repository
         private readonly IStorageAccount _storageAccount;
         private readonly CloudBlobClient _cloudBlobClient;
 
-
         public BlobContainerRepository(IStorageAccount storageAccount)
         {
             _storageAccount = storageAccount;
             _cloudBlobClient = _storageAccount.GetCloudBlobClient();
         }
 
-        public Task CreateNewBlobContainer(IBlobContainer blobContainer)
+        public async Task CreateNewBlobContainer(IBlobContainer blobContainer)
         {
-            throw new NotImplementedException();
+            var blobContainerReference = _cloudBlobClient.GetContainerReference(blobContainer.Name);            
+
+            var exists = await blobContainerReference.ExistsAsync();
+
+            if (!exists)
+            {
+                await blobContainerReference.CreateAsync(blobContainer.PublicAccessType, blobContainer.RequestOptions, blobContainer.OperationContext);
+            }
         }
 
         public Task DeleteBlobContainer(IBlobContainer blobContainer)
@@ -62,11 +68,14 @@ namespace Azure.BlobAccess.Core.Repository
             return blobContainers;
         }
 
-        public async Task<IBlobContainer> GetBlobContainerByName(string name)
+        public async Task<IBlobContainer> GetBlobContainerByName(string name, bool createIfNotExists)
         {
             var blobContainer = _cloudBlobClient.GetContainerReference(name);
 
-            await blobContainer.CreateIfNotExistsAsync();
+            if (createIfNotExists)
+            {
+                await blobContainer.CreateIfNotExistsAsync();
+            }
 
             await blobContainer.FetchAttributesAsync();
 
@@ -77,7 +86,7 @@ namespace Azure.BlobAccess.Core.Repository
             };
         }
 
-        public Task RenameBlobContainer(IBlobContainer blobContainer, string name)
+        public Task EditBlobContainer(IBlobContainer blobContainer)
         {
             throw new NotImplementedException();
         }

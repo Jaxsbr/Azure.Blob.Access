@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.Storage.Blob;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,5 +9,8 @@ namespace Azure.BlobAccess.Core.Model
     {
         string Name { get; set; }
         DateTime LastModified { get; set; }
+        BlobContainerPublicAccessType PublicAccessType { get; set; }
+        BlobRequestOptions RequestOptions { get; set; }
+        Microsoft.WindowsAzure.Storage.OperationContext OperationContext { get; set; }
     }
 }
