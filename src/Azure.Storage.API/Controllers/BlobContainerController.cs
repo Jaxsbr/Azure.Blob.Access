@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure.BlobAccess.Core.Model;
 using Azure.BlobAccess.Core.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,13 +30,14 @@ namespace Azure.BlobAccess.API.Controllers
         [HttpGet("{name}")]
         public async Task<IActionResult> Get(string name)
         {
-            return ReturnActionResult(await _blobContainerRepository.GetBlobContainerByName(name));
+            return ReturnActionResult(await _blobContainerRepository.GetBlobContainerByName(name, false));
         }
 
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post([FromBody] IBlobContainer blobContainer)
         {
+            await _blobContainerRepository.CreateNewBlobContainer(blobContainer);
         }
 
 

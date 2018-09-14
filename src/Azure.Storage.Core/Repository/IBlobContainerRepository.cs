@@ -9,9 +9,9 @@ namespace Azure.BlobAccess.Core.Repository
     public interface IBlobContainerRepository
     {
         Task<IEnumerable<IBlobContainer>> GetAllBlobContainers();
-        Task<IBlobContainer> GetBlobContainerByName(string name);
+        Task<IBlobContainer> GetBlobContainerByName(string name, bool createIfNotExists);
         Task CreateNewBlobContainer(IBlobContainer blobContainer);
-        Task RenameBlobContainer(IBlobContainer blobContainer, string name);
+        Task EditBlobContainer(IBlobContainer blobContainer);
         Task DeleteBlobContainer(IBlobContainer blobContainer);
     }
 }
