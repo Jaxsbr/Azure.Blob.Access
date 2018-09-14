@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Azure.BlobAccess.Core\Azure.BlobAccess.Core.csproj" />
+    <ProjectReference Include="..\Azure.Storage.Core\Azure.Storage.Core.csproj" />
   </ItemGroup>
 
 </Project>
