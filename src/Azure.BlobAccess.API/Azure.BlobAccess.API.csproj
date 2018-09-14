@@ -12,4 +12,8 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Azure.BlobAccess.Core\Azure.BlobAccess.Core.csproj" />
+  </ItemGroup>
+
 </Project>
