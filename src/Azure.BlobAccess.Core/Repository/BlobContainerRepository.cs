@@ -30,14 +30,51 @@ namespace Azure.BlobAccess.Core.Repository
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<IBlobContainer>> GetAllBlobContainers()
+        public async Task<IEnumerable<IBlobContainer>> GetAllBlobContainers()
         {
-            throw new NotImplementedException();
+            BlobContinuationToken continuationToken = null;
+
+            List<CloudBlobContainer> results = new List<CloudBlobContainer>();
+
+            List<IBlobContainer> blobContainers = new List<IBlobContainer>();
+
+            do
+            {
+                var response = await _cloudBlobClient.ListContainersSegmentedAsync(continuationToken);
+
+                continuationToken = response.ContinuationToken;
+
+                results.AddRange(response.Results);
+            }
+            while (continuationToken != null);
+
+            foreach (var container in results)
+            {
+                await container.FetchAttributesAsync();
+
+                blobContainers.Add(new BlobContainer()
+                {
+                    Name = container.Name,
+                    LastModified = Convert.ToDateTime(container.Properties.LastModified.ToString()),
+                });
+            }
+
+            return blobContainers;
         }
 
-        public Task<IBlobContainer> GetBlobContainerByName()
+        public async Task<IBlobContainer> GetBlobContainerByName(string name)
         {
-            throw new NotImplementedException();
+            var blobContainer = _cloudBlobClient.GetContainerReference(name);
+
+            await blobContainer.CreateIfNotExistsAsync();
+
+            await blobContainer.FetchAttributesAsync();
+
+            return new BlobContainer()
+            {
+                Name = blobContainer.Name,
+                LastModified = Convert.ToDateTime(blobContainer.Properties.LastModified.ToString()),
+            };
         }
 
         public Task RenameBlobContainer(IBlobContainer blobContainer, string name)
