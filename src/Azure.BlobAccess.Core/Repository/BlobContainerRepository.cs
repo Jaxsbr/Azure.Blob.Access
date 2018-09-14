@@ -10,14 +10,14 @@ namespace Azure.BlobAccess.Core.Repository
 {
     public class BlobContainerRepository : IBlobContainerRepository
     {
-        private readonly IStorageAccount _storeageAccount;
+        private readonly IStorageAccount _storageAccount;
         private readonly CloudBlobClient _cloudBlobClient;
 
 
         public BlobContainerRepository(IStorageAccount storageAccount)
         {
-            _storeageAccount = storageAccount;
-            _cloudBlobClient = _storeageAccount.GetCloudBlobClient();
+            _storageAccount = storageAccount;
+            _cloudBlobClient = _storageAccount.GetCloudBlobClient();
         }
 
         public Task CreateNewBlobContainer(IBlobContainer blobContainer)
