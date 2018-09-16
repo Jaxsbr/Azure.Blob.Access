@@ -35,7 +35,7 @@ namespace Azure.BlobAccess.API.Controllers
 
 
         [HttpPost]
-        public async Task Post([FromBody] IBlobContainer blobContainer)
+        public async Task Post([FromBody] BlobContainer blobContainer)
         {
             await _blobContainerRepository.CreateNewBlobContainer(blobContainer);
         }

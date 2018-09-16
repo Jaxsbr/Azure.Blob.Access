@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Azure.BlobAccess.Core.Domain;
+using Azure.BlobAccess.Core.Model;
 using Azure.BlobAccess.Core.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,7 @@ namespace Azure.BlobAccess.API
 
             services.AddSingleton<IStorageAccount>(new StorageAccount(connectionString: Configuration.GetConnectionString("StorageAccountConnectionString")));
             services.AddSingleton<IBlobContainerRepository, BlobContainerRepository>();
+            services.AddTransient<IBlobContainer, BlobContainer>();
         }
 
         
@@ -46,7 +48,12 @@ namespace Azure.BlobAccess.API
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }
