@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure.Storage.Core", "Azure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure.Storage.API", "Azure.Storage.API\Azure.Storage.API.csproj", "{69D50EFA-7189-4DB4-81BF-363E77AAE41A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure.Storage.Application", "Azure.Storage.Application\Azure.Storage.Application.csproj", "{50A477A2-400D-48B1-9C7C-DDB7D5E18043}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure.Storage.Domain", "Azure.Storage.Domain\Azure.Storage.Domain.csproj", "{C5B10C94-4D33-4B6D-82FD-C81A346A0B4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{69D50EFA-7189-4DB4-81BF-363E77AAE41A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69D50EFA-7189-4DB4-81BF-363E77AAE41A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69D50EFA-7189-4DB4-81BF-363E77AAE41A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50A477A2-400D-48B1-9C7C-DDB7D5E18043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50A477A2-400D-48B1-9C7C-DDB7D5E18043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50A477A2-400D-48B1-9C7C-DDB7D5E18043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50A477A2-400D-48B1-9C7C-DDB7D5E18043}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5B10C94-4D33-4B6D-82FD-C81A346A0B4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5B10C94-4D33-4B6D-82FD-C81A346A0B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5B10C94-4D33-4B6D-82FD-C81A346A0B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5B10C94-4D33-4B6D-82FD-C81A346A0B4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
