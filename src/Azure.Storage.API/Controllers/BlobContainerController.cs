@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Azure.BlobAccess.Core.Model;
-using Azure.BlobAccess.Core.Repository;
+using Azure.Storage.Application.BlobContainers.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Azure.BlobAccess.API.Controllers
@@ -11,34 +11,27 @@ namespace Azure.BlobAccess.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class BlobContainerController : BaseController
-  {
-        private readonly IBlobContainerRepository _blobContainerRepository;          
-
-        public BlobContainerController(IBlobContainerRepository blobContainerRepository)
-        {
-            _blobContainerRepository = blobContainerRepository;
-        }
-
-
+    {
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return ReturnActionResult(await _blobContainerRepository.GetAllBlobContainers());
+            return ReturnActionResult(await Mediator.Send(new GetAllBlobContainersQuery()));
         }
 
 
         [HttpGet("{name}")]
         public async Task<IActionResult> Get(string name)
         {
-            return ReturnActionResult(await _blobContainerRepository.GetBlobContainerByName(name, false));
+            //return ReturnActionResult(await _blobContainerRepository.GetBlobContainerByName(name, false));
+            throw new NotImplementedException();
         }
 
 
-        [HttpPost]
-        public async Task Post([FromBody] BlobContainer blobContainer)
-        {
-            await _blobContainerRepository.CreateNewBlobContainer(blobContainer);
-        }
+        //[HttpPost]
+        //public async Task Post([FromBody] BlobContainer blobContainer)
+        //{
+        //    await _blobContainerRepository.CreateNewBlobContainer(blobContainer);
+        //}
 
 
         [HttpPut("{id}")]

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure.Storage.Application",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure.Storage.Domain", "Azure.Storage.Domain\Azure.Storage.Domain.csproj", "{C5B10C94-4D33-4B6D-82FD-C81A346A0B4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure.Storage.Persistence", "Azure.Storage.Persistence\Azure.Storage.Persistence.csproj", "{3BB144AC-104B-4C92-A1B0-5321A7B8F22E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C5B10C94-4D33-4B6D-82FD-C81A346A0B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5B10C94-4D33-4B6D-82FD-C81A346A0B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5B10C94-4D33-4B6D-82FD-C81A346A0B4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB144AC-104B-4C92-A1B0-5321A7B8F22E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB144AC-104B-4C92-A1B0-5321A7B8F22E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB144AC-104B-4C92-A1B0-5321A7B8F22E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB144AC-104B-4C92-A1B0-5321A7B8F22E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

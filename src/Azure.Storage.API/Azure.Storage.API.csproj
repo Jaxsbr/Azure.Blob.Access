@@ -9,12 +9,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="5.1.0" />
+    <PackageReference Include="MediatR.Extensions" Version="0.6.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Azure.Storage.Core\Azure.Storage.Core.csproj" />
+    <ProjectReference Include="..\Azure.Storage.Application\Azure.Storage.Application.csproj" />
+    <ProjectReference Include="..\Azure.Storage.Persistence\Azure.Storage.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

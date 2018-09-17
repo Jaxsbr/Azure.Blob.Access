@@ -6,7 +6,13 @@ namespace Azure.Storage.Application.BlobContainers.Models
 {
     public class BlobContainersListViewModel
     {
-        public IEnumerable<BlobContainerDto> BlobContainers { get; set; }
+        public BlobContainersListViewModel()
+        {
+            BlobContainers = new List<BlobContainerDto>();
+        }
+        
+
+        public List<BlobContainerDto> BlobContainers { get; set; }
         public bool CreateEnabled { get; set; }
     }
 }

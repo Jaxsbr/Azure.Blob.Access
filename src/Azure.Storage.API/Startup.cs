@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Azure.BlobAccess.Core.Domain;
-using Azure.BlobAccess.Core.Model;
-using Azure.BlobAccess.Core.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MediatR;
+using MediatR.Pipeline;
+using Azure.Storage.Application.BlobContainers.Queries;
+using System.Reflection;
+using Azure.Storage.Persistence;
 
 namespace Azure.BlobAccess.API
 {
@@ -27,12 +30,16 @@ namespace Azure.BlobAccess.API
 
         
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+        {            
             services.AddSingleton<IStorageAccount>(new StorageAccount(connectionString: Configuration.GetConnectionString("StorageAccountConnectionString")));
-            services.AddSingleton<IBlobContainerRepository, BlobContainerRepository>();
-            services.AddTransient<IBlobContainer, BlobContainer>();
+            //services.AddSingleton<IBlobContainerRepository, BlobContainerRepository>();
+            //services.AddTransient<IBlobContainer, BlobContainer>();
+            
+            services.AddMediatR(typeof(GetAllBlobContainersQuery).GetTypeInfo().Assembly);              
+      
+
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         
