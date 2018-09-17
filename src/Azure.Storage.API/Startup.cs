@@ -16,6 +16,7 @@ using MediatR.Pipeline;
 using Azure.Storage.Application.BlobContainers.Queries;
 using System.Reflection;
 using Azure.Storage.Persistence;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Azure.BlobAccess.API
 {
@@ -32,12 +33,13 @@ namespace Azure.BlobAccess.API
         public void ConfigureServices(IServiceCollection services)
         {            
             services.AddSingleton<IStorageAccount>(new StorageAccount(connectionString: Configuration.GetConnectionString("StorageAccountConnectionString")));
-            //services.AddSingleton<IBlobContainerRepository, BlobContainerRepository>();
-            //services.AddTransient<IBlobContainer, BlobContainer>();
             
-            services.AddMediatR(typeof(GetAllBlobContainersQuery).GetTypeInfo().Assembly);              
-      
+            services.AddMediatR(typeof(GetAllBlobContainersQuery).GetTypeInfo().Assembly);
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -53,6 +55,13 @@ namespace Azure.BlobAccess.API
             {
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseHttpsRedirection();
             app.UseMvc(routes =>
