@@ -5,7 +5,7 @@
 
 ### General
 - [x] Implement Mediator Pattern - Utilize MediatR (https://github.com/jbogard/MediatR)
-- [ ] Cleanup | Remove uncommented code | Implement swagger (home page improvements)
+- [x] Cleanup | Remove uncommented code | Implement swagger (home page improvements)
 - [ ] Config inject (connection string) | Authorise API calls when connection string is valid
 - [ ] Implement Rate limiting
 
