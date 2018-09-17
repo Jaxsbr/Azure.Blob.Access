@@ -8,6 +8,6 @@ namespace Azure.Storage.Application.BlobContainers.Models
     {
         public BlobContainerDto BlobContainer { get; set; }
         public bool EditEnabled { get; set; }
-        public bool DeleteEnabled { get; set; }
+        public bool DeleteEnabled { get; set; }        
     }
 }

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Azure.Storage.Application.BlobContainers.Command;
+using Azure.Storage.Application.BlobContainers.Models;
 using Azure.Storage.Application.BlobContainers.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,18 +23,19 @@ namespace Azure.BlobAccess.API.Controllers
 
 
         [HttpGet("{name}")]
+        [ProducesResponseType(typeof(BlobContainerViewModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Get(string name)
-        {
-            //return ReturnActionResult(await _blobContainerRepository.GetBlobContainerByName(name, false));
-            throw new NotImplementedException();
+        {            
+            return ReturnActionResult(await Mediator.Send(new GetBlobContainerQuery(name, false)));
         }
 
 
-        //[HttpPost]
-        //public async Task Post([FromBody] BlobContainer blobContainer)
-        //{
-        //    await _blobContainerRepository.CreateNewBlobContainer(blobContainer);
-        //}
+        [HttpPost]
+        [ProducesResponseType(typeof(BlobContainerViewModel), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Post([FromBody] CreateBlobContainerCommand command)
+        {
+            return ReturnActionResult(await Mediator.Send(command));
+        }
 
 
         [HttpPut("{id}")]
