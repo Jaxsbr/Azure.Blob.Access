@@ -17,6 +17,7 @@ using Azure.Storage.Application.BlobContainers.Queries;
 using System.Reflection;
 using Azure.Storage.Persistence;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.EntityFrameworkCore;
 
 namespace Azure.BlobAccess.API
 {
@@ -31,7 +32,7 @@ namespace Azure.BlobAccess.API
 
         
         public void ConfigureServices(IServiceCollection services)
-        {            
+        {      
             services.AddSingleton<IStorageAccount>(new StorageAccount(connectionString: Configuration.GetConnectionString("StorageAccountConnectionString")));
             
             services.AddMediatR(typeof(GetAllBlobContainersQuery).GetTypeInfo().Assembly);

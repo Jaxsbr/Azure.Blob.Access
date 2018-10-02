@@ -1,5 +1,6 @@
 ﻿using Azure.Storage.Application.BlobContainers.Models;
 using Azure.Storage.Domain.Entities;
+using Azure.Storage.Domain.Enums;
 using Azure.Storage.Persistence;
 using MediatR;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -41,6 +42,7 @@ namespace Azure.Storage.Application.BlobContainers.Queries
                 {
                     Name = blobContainer.Name,
                     LastModified = Convert.ToDateTime(blobContainer.Properties.LastModified.ToString()),
+                    AccessType = (BlobContainerAccessType)(blobContainer.Properties.PublicAccess)
                 }),
                 DeleteEnabled = true,
                 EditEnabled = true
