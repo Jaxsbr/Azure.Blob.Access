@@ -11,39 +11,39 @@ using System.Threading.Tasks;
 
 namespace Azure.Storage.Application.BlobContainers.Command
 {
-  public class CreateBlobContainerCommandHandler : IRequestHandler<CreateBlobContainerCommand, BlobContainerViewModel>
-  {
-    private readonly IStorageAccount _storageAccount;
-    private readonly IMediator _mediator;
-    private readonly CloudBlobClient _cloudBlobClient;
-
-    public CreateBlobContainerCommandHandler(IStorageAccount storageAccount, IMediator mediator)
+    public class CreateBlobContainerCommandHandler : IRequestHandler<CreateBlobContainerCommand, BlobContainerViewModel>
     {
-      _storageAccount = storageAccount;
+        private readonly IStorageAccount _storageAccount;
+        private readonly IMediator _mediator;
+        private readonly CloudBlobClient _cloudBlobClient;
 
-      _mediator = mediator;
+        public CreateBlobContainerCommandHandler(IStorageAccount storageAccount, IMediator mediator)
+        {
+            _storageAccount = storageAccount;
 
-      _cloudBlobClient = _storageAccount.GetCloudBlobClient();
+            _mediator = mediator;
+
+            _cloudBlobClient = _storageAccount.GetCloudBlobClient();
+        }
+
+
+        public async Task<BlobContainerViewModel> Handle(CreateBlobContainerCommand request, CancellationToken cancellationToken)
+        {
+            var blobContainerReference = _cloudBlobClient.GetContainerReference(request.Name);
+
+            var exists = await blobContainerReference.ExistsAsync();
+
+            if (!exists)
+            {
+                var publicAccessType = (BlobContainerPublicAccessType)request.AccessType;
+
+                // TODO:
+                // Add defaults via blob request options. e.g. max blob size and timeout
+
+                await blobContainerReference.CreateAsync(publicAccessType, new BlobRequestOptions(), new Microsoft.WindowsAzure.Storage.OperationContext());
+            }
+
+            return await _mediator.Send(new GetBlobContainerQuery(request.Name, false));
+        }
     }
-
-
-    public async Task<BlobContainerViewModel> Handle(CreateBlobContainerCommand request, CancellationToken cancellationToken)
-    {
-      var blobContainerReference = _cloudBlobClient.GetContainerReference(request.Name);
-
-      var exists = await blobContainerReference.ExistsAsync();
-
-      if (!exists)
-      {        
-        var publicAccessType = request.IsPublic ? BlobContainerPublicAccessType.Container : BlobContainerPublicAccessType.Off;
-
-        // TODO:
-        // Add defaults via blob request options. e.g. max blob size and timeout
-
-        await blobContainerReference.CreateAsync(publicAccessType, new BlobRequestOptions(), new Microsoft.WindowsAzure.Storage.OperationContext());
-      }
-
-      return await _mediator.Send(new GetBlobContainerQuery(request.Name, false));
-    }
-  }
 }

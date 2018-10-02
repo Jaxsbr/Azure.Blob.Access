@@ -10,5 +10,5 @@ namespace Azure.Storage.Domain.Entities
         public string Name { get; set; }
         public DateTime LastModified { get; set; }
         public BlobContainerAccessType AccessType { get; set; }
-  }
+    }
 }
