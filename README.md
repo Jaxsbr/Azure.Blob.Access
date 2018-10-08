@@ -13,6 +13,7 @@
 ### Blob
 - [x] Add public access type enum as visible field for blob containers
 - [x] Implement Delete logic for Blob Containers.
+- [x] BlobContainer Unit Tests
 - [ ] Create todo items for BlobBlock's
 
 ### Queue
