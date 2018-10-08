@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Azure.Storage.Application.BlobContainers.Command
 {
-    public class UpdateBlobContainerCommandHandler : IRequestHandler<UpdateBlobContainerCommand, BlobContainerViewModel>
+    public class DeleteBlobContainerCommandHandler : IRequestHandler<DeleteBlobContainerCommand>
     {
         private readonly IStorageAccount _storageAccount;
         private readonly IMediator _mediator;
         private readonly CloudBlobClient _cloudBlobClient;
 
-        public UpdateBlobContainerCommandHandler(IStorageAccount storageAccount, IMediator mediator)
+        public DeleteBlobContainerCommandHandler(IStorageAccount storageAccount, IMediator mediator)
         {
             _storageAccount = storageAccount;
 
@@ -25,21 +25,14 @@ namespace Azure.Storage.Application.BlobContainers.Command
 
             _cloudBlobClient = _storageAccount.GetCloudBlobClient();
         }
-
-        public async Task<BlobContainerViewModel> Handle(UpdateBlobContainerCommand request, CancellationToken cancellationToken)
+    
+        public async Task<Unit> Handle(DeleteBlobContainerCommand request, CancellationToken cancellationToken)
         {
             var blobContainerReference = _cloudBlobClient.GetContainerReference(request.Name);
 
-            var exists = await blobContainerReference.ExistsAsync();
+            await blobContainerReference.DeleteIfExistsAsync();            
 
-            if (!exists)
-            {
-                return null;
-            }
-
-            // TODO: Override blobContainer with request
-
-            throw new NotImplementedException();
+            return Unit.Value;
         }
-    }
+  }
 }
