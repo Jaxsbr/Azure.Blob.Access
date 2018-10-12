@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Azure.Storage.Application.BlobContainers.Command
+namespace Azure.Storage.Application.BlobContainers.Commands
 {
     public class DeleteBlobContainerCommandHandler : IRequestHandler<DeleteBlobContainerCommand>
     {

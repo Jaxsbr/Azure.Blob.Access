@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Azure.Storage.Application.BlobContainers.Command
+namespace Azure.Storage.Application.BlobContainers.Commands
 {
     public class CreateBlobContainerCommandHandler : IRequestHandler<CreateBlobContainerCommand, BlobContainerViewModel>
     {
@@ -36,10 +36,7 @@ namespace Azure.Storage.Application.BlobContainers.Command
             if (!exists)
             {
                 var publicAccessType = (BlobContainerPublicAccessType)request.AccessType;
-
-                // TODO:
-                // Add defaults via blob request options. e.g. max blob size and timeout
-
+                
                 await blobContainerReference.CreateAsync(publicAccessType, new BlobRequestOptions(), new Microsoft.WindowsAzure.Storage.OperationContext());
             }
 

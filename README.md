@@ -25,5 +25,6 @@
 - [ ] Implement files management feature
 
 ### Tables
-- [ ] Create todo items for this list
-- [ ] Implement tables management feature
+- [ ] Create cloud table
+- [ ] Delete cloud table
+- [ ] CRUD operation for generic table records

@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Azure.Storage.Application.BlobContainers.Command
+namespace Azure.Storage.Application.BlobContainers.Commands
 {
-    public class DeleteBlobContainerCommand : IRequest
+    public class CreateBlobContainerCommand : IRequest<BlobContainerViewModel>
     {
         public string Name { get; set; }
+        public BlobContainerAccessType AccessType { get; set; }
     }
 }

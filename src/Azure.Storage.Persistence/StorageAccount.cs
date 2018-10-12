@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Queue;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Azure.Storage.Persistence
 {
@@ -25,7 +26,12 @@ namespace Azure.Storage.Persistence
 
         public CloudQueueClient GetCloudQueueClient()
         {
-          return _cloudStorageAccount.CreateCloudQueueClient();
+            return _cloudStorageAccount.CreateCloudQueueClient();
+        }
+
+        public CloudTableClient GetCloudTableClient()
+        {
+            return _cloudStorageAccount.CreateCloudTableClient();
         }
     }
 }

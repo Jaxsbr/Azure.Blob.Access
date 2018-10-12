@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Azure.Storage.Application.BlobContainers.Command;
+using Azure.Storage.Application.BlobContainers.Commands;
 using Azure.Storage.Application.BlobContainers.Models;
 using Azure.Storage.Application.BlobContainers.Queries;
 using MediatR;
